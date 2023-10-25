@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Kitap>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Kitaplar</h1>
+
+<p>
+    <a asp-action="KitapEkle" class="btn btn-outline-primary">Yeni Kitap Ekle</a>
+</p>
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KitapAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fiyat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SayfaSayisi)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KitapAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fiyat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SayfaSayisi)
+            </td>
+            <td class="text-center">
+                    @Html.ActionLink("Düzenle", "KitapDuzenle", new { id = item.Id }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detay", "KitapDetay", new { id = item.Id }, new { @class = "btn btn-outline-success" }) |
+                    @Html.ActionLink("Sil", "KitapSil", "Kitap", new { id = item.Id }, new { onclick = "return confirm('Are you sure you want to delete this item?');", @class = "btn btn-outline-danger" })
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
